@@ -72,3 +72,7 @@ DerivedDataCache/*
 .idea/runConfigurations/UE4.xml
 .idea/workspace.xml
 .idea/xcode.xml
+PitchBlack.xcworkspace/.idea/modules.xml
+PitchBlack.xcworkspace/.idea/PitchBlack.xcworkspace.iml
+.idea/vcs.xml
+PitchBlack.xcworkspace/.idea/workspace.xml
