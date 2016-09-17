@@ -3,6 +3,11 @@
 #include "PitchBlack.h"
 #include "PitchBlackGameMode.h"
 
+APitchBlackGameMode::APitchBlackGameMode() : Super()
+{
+    const TCHAR* DefaultPawnFilename = TEXT("/Game/Blueprints/BP_PitchBlackCharacter");
 
+    static ConstructorHelpers::FClassFinder<APawn> PlayerPawnFinder(DefaultPawnFilename);
 
-
+    DefaultPawnClass = PlayerPawnFinder.Class;
+}

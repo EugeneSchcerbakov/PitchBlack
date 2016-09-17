@@ -13,7 +13,6 @@ class PITCHBLACK_API APitchBlackGameMode : public AGameMode
 {
 	GENERATED_BODY()
 	
-	
-	
-	
+public:
+	APitchBlackGameMode();
 };
