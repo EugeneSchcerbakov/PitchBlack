@@ -15,4 +15,19 @@ class PITCHBLACK_API APitchBlackGameMode : public AGameMode
 	
 public:
 	APitchBlackGameMode();
+
+    void BeginPlay() override;
+    void PostInitializeComponents() override;
+
+	void UpdateSonarVisionPProcFX();
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Sonar Vision")
+    class UMaterialInstanceDynamic* MIDSonarVision;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Sonar Vision")
+	class UMaterial* MSonarVision;
+
+private:
+	void InitSonarVision();
 };
