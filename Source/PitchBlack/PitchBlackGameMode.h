@@ -3,6 +3,8 @@
 #pragma once
 
 #include "GameFramework/GameMode.h"
+#include "SonarVisionManager.h"
+
 #include "PitchBlackGameMode.generated.h"
 
 /**
@@ -15,19 +17,14 @@ class PITCHBLACK_API APitchBlackGameMode : public AGameMode
 	
 public:
 	APitchBlackGameMode();
+    ~APitchBlackGameMode();
 
     void BeginPlay() override;
     void PostInitializeComponents() override;
+    void Tick(float DeltaTime) override;
 
-	void UpdateSonarVisionPProcFX();
+	inline SonarVisionManager* GetSonarVisionManager() {return SVManager;};
 
 protected:
-	UPROPERTY(BlueprintReadOnly, Category = "Sonar Vision")
-    class UMaterialInstanceDynamic* MIDSonarVision;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Sonar Vision")
-	class UMaterial* MSonarVision;
-
-private:
-	void InitSonarVision();
+    SonarVisionManager* SVManager;
 };

@@ -2,7 +2,9 @@
 
 #include "PitchBlack.h"
 #include "PitchBlackCharacter.h"
+#include "SonarVisionManager.h"
 
+#include "PitchBlackGameMode.h"
 
 // Sets default values
 APitchBlackCharacter::APitchBlackCharacter()
@@ -43,6 +45,8 @@ void APitchBlackCharacter::SetupPlayerInputComponent(class UInputComponent* Inpu
 //    InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 //    InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
+    InputComponent->BindAction("Noise", IE_Pressed, this, &APitchBlackCharacter::MakeNoise);
+
     InputComponent->BindAxis("MoveForward", this, &APitchBlackCharacter::MoveForward);
     InputComponent->BindAxis("MoveRight", this, &APitchBlackCharacter::MoveRight);
 
@@ -76,4 +80,20 @@ void APitchBlackCharacter::TurnAtRate(float Rate)
 void APitchBlackCharacter::LookUpAtRate(float Rate)
 {
     AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+}
+
+void APitchBlackCharacter::MakeNoise()
+{
+    UWorld* const World = GetWorld();
+    AGameMode* const GameMode = World->GetAuthGameMode();
+    APitchBlackGameMode* PitchBlackGameMode = Cast<APitchBlackGameMode>(GameMode);
+
+    if (PitchBlackGameMode)
+    {
+        FVector Position = GetFirstPersonCameraComponent()->GetComponentLocation();
+        float Radius = 1.25f;
+
+        SonarVisionManager* SVMgr = PitchBlackGameMode->GetSonarVisionManager();
+        SVMgr->AddSource(NoiseInfo(Position, Radius));
+    }
 }
